@@ -9,20 +9,22 @@ package cse360assign2;
 * total by the passed value and replaces total with the product. divide() 
 * divides the total by the passed value and replaces total with the value of 
 * the division. getHistory() returns all commands made since the program 
-* started.
+* started and the resulting equation.
 * 
 * @author  Tyler Aanenson
-* @version 3.0
+* @version 4.0
 * @since   2019-02-24
 */
 public class Calculator {
 
 	private int total;
 	private String history;
+	private String equation;
 	
 	public Calculator () {
 		total = 0;  	// not needed - included for clarity
 		history = "";	// not needed - included for clarity
+		equation = "";
 	}
 	
 	/**
@@ -35,41 +37,63 @@ public class Calculator {
 	}
 	
 	/**
-	   * This method adds a number to the current total and updates 
-	   * history to include the command.
+	   * This method adds a number to the current total, updates 
+	   * history to include the command, and updates equation to 
+	   * include the new entry.
 	   * @param value This is the integer to be added to total
 	   * @return Nothing
 	   */
 	public void add (int value) {
 		total += value;
-		history += (value + " added to total \n");
+		history += ("myCalculator.add (" + value + ");\n");
+		if (equation.isEmpty()) {
+			equation += ("0 + " + value);
+		}
+		else {
+			equation += (" + " + value);
+		}
 	}
 	
 	/**
-	   * This method subtracts a number from the current total and updates 
-	   * history to incluse the command.
+	   * This method subtracts a number from the current total, updates 
+	   * history to include the command, and updates equation to 
+	   * include the new entry.
 	   * @param value This is the number to be subtracted from the total.
 	   * @return Nothing
 	   */
 	public void subtract (int value) {
 		total -= value;
-		history += (value + " subtracted from total \n");
+		history += ("myCalculator.subtract (" + value + ");\n");
+		if (equation.isEmpty()) {
+			equation += ("0 - " + value);
+		}
+		else {
+			equation += (" - " + value);
+		}
 	}
 	
 	/**
-	   * This method multiplies the current total by a number and updates 
-	   * total to include the command.
+	   * This method multiplies the current total by a number, updates 
+	   * history to include the command, and updates equation to 
+	   * include the new entry.
 	   * @param value This is the number to be multiplied with the total.
 	   * @return Nothing
 	   */
 	public void multiply (int value) {
 		total *= value;
-		history += (value + " multiplied with total \n");
+		history += ("myCalculator.multiply (" + value + ");\n");
+		if (equation.isEmpty()) {
+			equation += ("0 * " + value);
+		}
+		else {
+			equation += (" * " + value);
+		}
 	}
 	
 	/**
-	   * This method divides the current total by a number and updates 
-	   * history to include the command.
+	   * This method divides the current total by a number, updates 
+	   * history to include the command, and updates equation to 
+	   * include the new entry.
 	   * @param value This is the number the total will be divided by
 	   * @return Nothing
 	   */
@@ -80,15 +104,23 @@ public class Calculator {
 		else {
 			total /= value;
 		}
-		history += ("Total divided by " + value + "\n");
+		history += ("myCalculator.divide (" + value + ");\n");
+		if (equation.isEmpty()) {
+			equation += ("0 / " + value);
+		}
+		else {
+			equation += (" / " + value);
+		}
 	}
 	
 	/**
-	   * This method prints the history of commands entered.
+	   * This method prints the history of commands entered and the 
+	   * resulting equation.
 	   * @param Unused
 	   * @return history The string of all previous commands entered.
 	   */
 	public String getHistory () {
-		return "History: \n" + history;
+		return "History: \n" + history + equation;
+		
 	}
 }
